@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDD - Intro - Vitor Felix</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+    <h1>DDD - Intro</h1>
+</header>
+
+<nav>
+    <a href="../../index.html">Home</a> |
+    <a href="../../blog.html">Blog</a>
+</nav>
+
+<main>
+
+<h2>Definição Formal</h2>
+<blockquote>
+<p>"Domain-Driven Design (DDD) é uma abordagem de desenvolvimento de software baseada na premissa de que o código deve ser estruturado em torno do domínio da aplicação e de sua lógica de negócio. Em sistemas complexos, o desenvolvimento deve ser focado no modelo do negócio, promovendo um alinhamento contínuo entre os especialistas do domínio (<em>Domain Experts</em>) e o time de engenharia por meio de um modelo conceitual compartilhado."<br />
+— <em>Eric Evans (2003)</em></p>
+</blockquote>
+<h2>Em outras palavras</h2>
+<p>DDD não é um framework, um padrão de pastas ou um tipo de banco de dados. É uma <strong>filosofia de trabalho</strong> para evitar que programadores construam sistemas que não resolvem a dor real do negócio. </p>
+<p>Em vez de começar o projeto decidindo a tabela do banco, você senta com quem entende da empresa e desenha o código com base nas regras do negócio real.</p>
+<hr />
+<h2>Estratégico vs. Tático</h2>
+<ul>
+<li><strong>Design Estratégico (Definição Técnica):</strong> Conjunto de padrões organizacionais e modelagens de alto nível focados no mapeamento do domínio, na divisão de responsabilidades em subdomínios, no estabelecimento de fronteiras contextuais e no mapeamento de integração entre times e sistemas.  </li>
+<li>
+<p><em>Em outras palavras:</em> O <strong>mapa da cidade</strong>. Define onde focar investimento, como dividir o sistema em áreas e como delimitar fronteiras.</p>
+</li>
+<li>
+<p><strong>Design Tático (Definição Técnica):</strong> Padrões de projeto de software (<em>design patterns</em>) voltados à implementação do código de domínio purificado, garantindo o encapsulamento das regras de negócio e a integridade de invariants dentro de um modelo isolado de tecnologia.  </p>
+</li>
+<li><em>Em outras palavras:</em> A <strong>planta da casa</strong>. Padrões de código usados para construir o software dentro dessas fronteiras.</li>
+</ul>
+<hr />
+<h2>1. Design Estratégico (Visão Macro)</h2>
+<h3>Subdomínios</h3>
+<p><strong>Definição:</strong> Divisão lógica e operacional do problema de negócio em partes menores e mais gerenciáveis, categorizadas segundo o valor estratégico e a vantagem competitiva para a empresa.</p>
+<ul>
+<li><strong>Core (Principal):</strong> A razão de existir da empresa e sua principal vantagem competitiva no mercado. Exige alto esforço de engenharia e código 100% customizado.</li>
+<li><em>Exemplo:</em> Algoritmo de recomendação da Netflix; sistema de otimização de rotas da DHL.</li>
+<li><strong>Suporte:</strong> Aplicações necessárias para viabilizar as operações do Core Domain, porém sem gerar diferenciação no mercado. Geralmente possuem lógica simples (CRUDs).</li>
+<li><em>Exemplo:</em> Cadastro de filmes no catálogo da Netflix.</li>
+<li><strong>Genérico:</strong> Processos operacionais padrão de mercado que não possuem regras exclusivas do negócio. Solucionados via softwares de terceiros (<em>SaaS</em>) ou bibliotecas prontas.</li>
+<li><em>Exemplo:</em> Módulo de faturamento/cobrança (integração via Gateway); serviço de autenticação de usuários.</li>
+</ul>
+<h3>Bounded Contexts (Limites de Contexto)</h3>
+<p><strong>Definição:</strong> Delimitação explícita de uma fronteira conceitual na qual um modelo de domínio específico se aplica com significado único, consistente e não ambíguo.</p>
+<ul>
+<li><em>Exemplo:</em> Em um E-commerce:</li>
+<li>No contexto de <strong>Vendas</strong>: <code>Produto</code> representa um item catalogado com preço, foto e promoções aplicáveis.</li>
+<li>No contexto de <strong>Estoque</strong>: <code>Produto</code> representa um item físico armazenado com dimensões, peso e localização de prateleira.</li>
+<li>No contexto de <strong>Entrega</strong>: <code>Produto</code> representa um volume a ser transportado vinculado a uma etiqueta e código de rastreio.</li>
+</ul>
+<h3>Linguagem Ubíqua</h3>
+<p><strong>Definição:</strong> Linguagem rigorosa e compartilhada, construída colaborativamente por desenvolvedores e <em>Domain Experts</em>, utilizada de forma idêntica nas conversas, documentações e na implementação do código fonte.</p>
+<ul>
+<li><em>Exemplo:</em> Se a regra comercial é <em>"Cancelar Matrícula por Inadimplência"</em>, a implementação técnica refletirá o método <code>cancelarMatriculaPorInadimplencia()</code> (evitando jargões genéricos de programação como <code>updateStatus(0)</code> ou <code>setFlagActive(false)</code>).</li>
+</ul>
+<hr />
+<h2>2. Design Tático (Visão Micro / Código)</h2>
+<h3>Value Objects (Objetos de Valor)</h3>
+<p><strong>Definição:</strong> Elementos imutáveis do modelo definidos exclusivamente por seus atributos (valores), sem identificação conceitual única.</p>
+<ul>
+<li><em>Exemplo:</em> <code>CPF</code>, <code>Email</code>, <code>Dinheiro(valor, moeda)</code>. Se o valor for alterado, trata-se de uma nova instância distinta.</li>
+</ul>
+<h3>Entities (Entidades)</h3>
+<p><strong>Definição:</strong> Objetos de domínio que possuem uma identidade única e contínua ao longo de seu ciclo de vida, cujos atributos podem alterar de estado sem alterar a identidade do elemento.</p>
+<ul>
+<li><em>Exemplo:</em> <code>Cliente(id: 123)</code>. Pode alterar nome, telefone e endereço, contudo permanece rastreável como o mesmo cliente no sistema.</li>
+</ul>
+<h3>Aggregates (Agregados)</h3>
+<p><strong>Definição:</strong> Grafo de Entidades e Objetos de Valor tratados como uma unidade coesa para modificação de dados, delimitados por uma raiz (<em>Aggregate Root</em>) responsável por garantir a consistência transactional e as invariants de negócio.</p>
+<ul>
+<li><em>Exemplo:</em> A raiz <code>Pedido</code> gerencia o acesso às suas entidades filhas <code>ItemPedido</code>. O acesso direto a um item para alteração de valor é proibido; a modificação deve ser validada e executada pela raiz <code>Pedido</code>.</li>
+</ul>
+<h3>Repositories (Repositórios)</h3>
+<p><strong>Definição:</strong> Abstração da camada de persistência que simula uma coleção em memória de Agregados, isolando o modelo de domínio de detalhes técnicos de banco de dados ou frameworks.</p>
+<ul>
+<li><em>Exemplo:</em> <code>pedidoRepository.salvar(pedido)</code>.</li>
+</ul>
+<h3>Domain Events (Eventos de Domínio)</h3>
+<p><strong>Definição:</strong> Notificação explícita de um evento de negócio relevante que ocorreu no passado dentro de um contexto delimitado, permitindo desacoplamento entre módulos.</p>
+<ul>
+<li><em>Exemplo:</em> <code>PedidoPagoEvent</code>, <code>MatriculaCanceladaEvent</code>.</li>
+</ul>
+<hr />
+<h2>DDD vs. Arquitetura Hexagonal: O quão similares?</h2>
+<p><strong>Não são a mesma coisa.</strong> São abordagens complementares com propósitos distintos.</p>
+<ul>
+<li><strong>Podem ser usados separados?</strong> Sim. É possível implementar a Arquitetura Hexagonal em projetos simples sem a modelagem tática/estratégica do DDD. Da mesma forma, é viável adotar o DDD utilizando outras arquiteturas (como <em>Clean Architecture</em> ou Arquitetura em Camadas).</li>
+<li><strong>Funcionam melhor juntos?</strong> Sim, a sinergia é ideal. O DDD define <em>onde situar e como modelar as regras de negócio puras</em>, enquanto a Arquitetura Hexagonal (Ports &amp; Adapters) fornece o <em>mecanismo arquitetural</em> para isolar o core do domínio de tecnologias externas (banco de dados, frameworks, adaptadores HTTP).</li>
+</ul>
+<hr />
+<h2>Takeaway</h2>
+<p>Nem todo projeto precisa de DDD. Se o sistema é um CRUD simples (como o sistema da padaria da esquina), aplicar DDD gera complexidade desnecessária. DDD é a ferramenta ideal para sistemas complexos, onde a regra de negócio é densa e muda constantemente.</p>
+
+</main>
+
+<footer>
+    <p>© 2026 Vitor Felix ☕</p>
+</footer>
+
+</div>
+
+</body>
+</html>

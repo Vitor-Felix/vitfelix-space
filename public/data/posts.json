@@ -1,5 +1,10 @@
 [
     {
+        "title": "DDD - Intro",
+        "slug": "001-intro-ddd",
+        "url": "posts/ddd/001-intro-ddd.html"
+    },
+    {
         "title": "The Strange Problem of Emergence",
         "slug": "001-complex-intelligences-from-small-systems",
         "url": "posts/intelligence/001-complex-intelligences-from-small-systems.html"
