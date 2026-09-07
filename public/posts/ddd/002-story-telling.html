@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDD - Aula 2: Domain Storytelling - Vitor Felix</title>
+
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+    <h1>DDD - Aula 2: Domain Storytelling</h1>
+</header>
+
+<nav>
+    <a href="../../index.html">Home</a> |
+    <a href="../../blog.html">Blog</a>
+</nav>
+
+<main>
+
+<h2>Definição Formal</h2>
+<blockquote>
+<p>"Domain Storytelling é uma técnica colaborativa e visual que utiliza uma linguagem pictográfica simplificada para transformar o conhecimento dos <em>Domain Experts</em> em narrativas visuais claras. O objetivo principal é alinhar a compreensão entre o time de negócio e o time de TI, mapeando como atores, objetos e atividades se relacionam no tempo."<br />
+— <em>Hofer &amp; Schwenter (2021)</em></p>
+</blockquote>
+
+<h2>Em outras palavras</h2>
+<p>Não tente adivinhar as regras lendo código antigo ou especificações gigantes. Em vez disso, junte os <em>Domain Experts</em> e peça para eles <strong>contarem histórias do dia a dia do negócio</strong>.</p>
+<p>Enquanto eles contam, você desenha a história na tela usando ícones simples. Isso expõe ruídos de comunicação, remove jargões de TI e cria um entendimento único do processo real antes de escrever qualquer linha de código.</p>
+
+<hr />
+
+<h2>1. A Linguagem Pictográfica (A Sintaxe Visual)</h2>
+<p>Sua história será contada combinando apenas 3 elementos fundamentais:</p>
+<ul>
+<li><strong>Atores (Quem?):</strong> Representam as pessoas, sistemas, times ou papéis que executam alguma ação.
+<ul>
+<li><em>Regra:</em> Nomeie por <strong>função</strong>, nunca pelo nome da pessoa (ex.: use <code>Secretária</code>, não <code>Maria</code>).</li>
+</ul>
+</li>
+<li><strong>Objetos de Trabalho (O quê?):</strong> Elementos físicos, digitais ou abstrações manipulados pelos atores.
+<ul>
+<li><em>Exemplos:</em> <code>Ficha de Matrícula</code> (físico), <code>E-mail de Confirmação</code> (digital), <code>Matrícula</code> (conceito).</li>
+</ul>
+</li>
+<li><strong>Atividades (Como?):</strong> Representadas por <strong>setas nomeadas</strong> indicando as ações que os atores realizam sobre os objetos de trabalho.</li>
+</ul>
+
+<hr />
+
+<h2>2. As Regras de Ouro da Modelagem</h2>
+<p>Para manter o diagrama legível para o negócio, evite vícios de programação:</p>
+<ol>
+<li><strong>Sem Condicionais (<code>if-else</code>):</strong> O mapa foca no caminho feliz daquela história específica. Fluxos alternativos ou de erro devem virar <strong>novas histórias</strong>.</li>
+<li><strong>Sem Retornos (<code>loopback</code>):</strong> Não desenhe setas voltando só para indicar "resposta" ou "confirmação" (como faria em diagramas de infra/redes). Foque no objetivo e intenção da ação.</li>
+<li><strong>Números Sequenciais:</strong> Toda ação (seta) recebe um número (<code>1</code>, <code>2</code>, <code>3</code>...) para dar ordem cronológica à narrativa. Ações em paralelo usam o mesmo número.</li>
+<li><strong>Escopo ("Nível do Mar"):</strong> Foque no objetivo real do usuário. Não detalhe cliques na tela ou chamadas de API, nem suba demais ao ponto de perder a regra de negócio.</li>
+</ol>
+
+<hr />
+
+<h2>3. Elementos de Organização e Destaque</h2>
+<ul>
+<li><strong>Anotações:</strong> Notas coladas ao diagrama para sinalizar limites, gatilhos de eventos, regras de negócio ou exceções pontuais.</li>
+<li><strong>Grupos:</strong> Linhas de fronteira desenhadas ao redor de um conjunto de passos para delimitar subdomínios, etapas do processo ou responsabilidades de sistemas.</li>
+<li><strong>Cores:</strong> Utilizadas pontualmente para dar ênfase visual a gargalos, falhas ou trechos de atenção crítica no fluxo.</li>
+</ul>
+
+<hr />
+
+<h2>4. Estratégia e Dinâmica da Sessão</h2>
+
+<h3>Cenários: AS IS vs. TO BE</h3>
+<ul>
+<li><strong>AS IS (O Hoje Real):</strong> O processo exatamente como ele acontece na prática. Comece sempre por este para garantir que todos entendam a dor atual.</li>
+<li><strong>TO BE (O Amanhã Desejado):</strong> A proposta de novo processo otimizado suportado pelo software.</li>
+</ul>
+
+<h3>Papéis na Sala de Mapeamento</h3>
+<ul>
+<li><strong>Domain Experts:</strong> Contam as histórias do negócio e validam se o desenho refletido está correto.</li>
+<li><strong>Ouvintes:</strong> Time de desenvolvimento/TI focado em aprender sobre o domínio.</li>
+<li><strong>Moderador:</strong> Guia a conversa, faz perguntas e impede que o grupo se perca em detalhes técnicos ou discussões fora de escopo.</li>
+<li><strong>Modelador:</strong> Desenha a história em tempo real utilizando os elementos pictográficos.</li>
+</ul>
+
+<hr />
+
+<h2>Takeaway</h2>
+<p>Domain Storytelling não é para desenhar arquitetura de software ou fluxo de banco de dados; é para <strong>entender o processo do negócio</strong>. Desenhe a história atual (<strong>AS IS</strong>), garanta que todos concordam com ela e só então projete como o software ajudará no processo futuro (<strong>TO BE</strong>).</p>
+
+</main>
+
+<footer>
+    <p>© 2026 Vitor Felix ☕</p>
+</footer>
+
+</div>
+
+</body>
+</html>
